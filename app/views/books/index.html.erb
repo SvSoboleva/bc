@@ -1,0 +1,8 @@
+<div class="buffer-both">
+  <%= link_to 'Добавить книгу', new_book_path, class: 'btn btn-success' %>
+</div>
+
+<div class="row buffer-bottom">
+  <%# Рендерим сразу массив событий, каждый в паршиале 'events/event' %>
+  <%= render partial: 'books/book', collection: @books %>
+</div>
