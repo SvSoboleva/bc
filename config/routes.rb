@@ -4,5 +4,5 @@ Rails.application.routes.draw do
 
   resources :books
   resources :users, only: [:show, :edit, :update]
-  resources :sections, only: [:edit]
+  resources :sections
 end

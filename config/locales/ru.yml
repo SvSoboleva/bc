@@ -7,3 +7,27 @@ ru:
     one: '%{count} ошибка'
     few: '%{count} ошибки'
     many: '%{count} ошибок'
+
+  # Перевод сообщений, которые отправляет контроллер
+  controllers:
+    books:
+      created: 'Вы добавили новою книгу'
+      updated: 'Вы обновили информацию о книге'
+      destroyed: 'Вы удалили книгу :('
+    users:
+      updated: 'Вы обновили свой профиль'
+    comments:
+      destroyed: 'Комментарий удален'
+      created: 'Ваш комментарий добавлен'
+      error: 'Ошибка с комментарием'
+    sections:
+      error: 'Что-то не так с разделом'
+      created: 'Вы добавили раздел'
+      destroyed: 'Вы удалили раздел'
+
+  view:
+    message:
+      sure: 'Вы уверены?'
+    btn:
+      change: 'Изменить'
+      delete: 'Удалить'

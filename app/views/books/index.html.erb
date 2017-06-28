@@ -3,6 +3,27 @@
 </div>
 
 <div class="row buffer-bottom">
-  <%# Рендерим сразу массив событий, каждый в паршиале 'events/event' %>
-  <%= render partial: 'books/book', collection: @books %>
+  <div class="col-md-2">
+    <div class="buffer-both">
+      <%= link_to 'Все', root_path %>
+      <% @sections.each do |section| %>
+          <div>
+          <%= link_to section.name, root_path %>
+          <% if current_user_can_edit?(section) %>
+              <%= link_to(
+                      fa_icon('trash'), section_path(section),
+                      method: :delete, data: {confirm: t('view.message.sure')}
+                  ) %>
+          <% end %>
+          </div>
+      <% end %>
+    </div>
+    <% if current_user_can_edit?(@section) %>
+      <%= link_to 'Создать раздел', new_section_path, class: 'btn btn-success' %>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <%# Рендерим сразу массив книг, каждый в паршиале 'books/book' %>
+    <%= render partial: 'books/book', collection: @books %>
+  </div>
 </div>

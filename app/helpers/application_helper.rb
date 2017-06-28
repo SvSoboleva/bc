@@ -6,4 +6,9 @@ module ApplicationHelper
       asset_path('kniga.jpg')
     end
   end
+
+  # Хелпер для иконок font-awesome
+  def fa_icon(icon_class)
+    content_tag 'span', '', class: "fa fa-#{icon_class}"
+  end
 end
