@@ -3,6 +3,31 @@ ru:
     name: 'Книжный клуб'
     company: ''
 
+  # Перевод моделей
+  activerecord:
+    # Перевод названия моделей
+    models:
+      user: 'Пользователь'
+      book: 'Книга'
+      section: 'Раздел'
+      comment: 'Комментарий'
+      list: 'Список'
+
+    # Перевод названий аттрибутов моделей
+    attributes:
+      user:
+        email: 'Email'
+        name: 'Имя'
+        avatar: 'Аватарка'
+        password: 'Пароль'
+        password_confirmation: 'Подтверждение пароля'
+      book:
+        title: 'Название'
+        author: 'Автор'
+        book_url: 'Обложка'
+        description: 'Описание'
+        section: 'Раздел библиотеки'
+
   error:
     one: '%{count} ошибка'
     few: '%{count} ошибки'
@@ -24,6 +49,7 @@ ru:
       error: 'Что-то не так с разделом'
       created: 'Вы добавили раздел'
       destroyed: 'Вы удалили раздел'
+      updated: 'Вы обновили раздел'
 
   view:
     message:

@@ -40,8 +40,9 @@
   color: #e0e0e0;
 }
 
-.event-info-inner {
+.book-info-inner {
   background:rgba(0, 0, 0, 0.4);
+  height: 200px;
 }
 
 .event-map {

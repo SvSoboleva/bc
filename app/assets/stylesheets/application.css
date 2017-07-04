@@ -35,6 +35,11 @@
   border-radius: 50%;
 }
 
+.img-book {
+  height: 200px;
+  width: auto;
+}
+
 /* Thumbnails for events/index */
 .thumbnail {
   position: relative;
@@ -42,15 +47,10 @@
   padding: 0;
   overflow: hidden;
   border-radius: 5px;
-}
-
-.thumbnail h3 {
-  white-space: nowrap;
-  overflow: hidden;
-  margin-top: 0;
-  margin-bottom: .3em;
+  width: 150px;
+  height: 250px;
 }
 
 .thumbnail-inner {
-  padding: 20px 4px 4px;
+  padding: 1px 1px 1px;
 }

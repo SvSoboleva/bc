@@ -28,9 +28,10 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = current_user.books.build(book_params)
+   # @book.section = Section.all.first
 
     if @book.save
-      redirect_to @book, notice: I18n.t('controllers.books.created')
+      redirect_to root_path, notice: I18n.t('controllers.books.created')
     else
       render :new
     end
@@ -71,6 +72,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :book_url, :description)
+    params.require(:book).permit(:title, :author, :book_url, :description, :section_id)
   end
 end
