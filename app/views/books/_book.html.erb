@@ -1,10 +1,12 @@
+<div class="col-sm-6 col-md-4">
 <div class="thumbnail">
-  <div class="thumbnail-inner book-info-inner">
-    <div class="caption align_middle">
+  <div class="thumbnail-inner">
+    <div class="book-img">
       <%= link_to image_tag(book_img(book)), book_path(book) %>
 
     </div>
   </div>
   <div><%= book.title %></div>
   <div><%= book.author %></div>
+</div>
 </div>

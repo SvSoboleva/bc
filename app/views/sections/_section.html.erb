@@ -1,10 +1,12 @@
 <div>
   <%= link_to section.name, root_path %>
-  <% if current_user_can_edit?(section) %>
+  <% if current_user_is_admin? %>
       <%= link_to(fa_icon('edit'), edit_section_path(section)) %>
-      <%= link_to(
+      <% if Book.where(section: section) == [] %>
+        <%= link_to(
               fa_icon('trash'), section_path(section),
               method: :delete, data: {confirm: t('view.message.sure')}
-          ) %>
+        ) %>
+      <% end %>
   <% end %>
 </div>

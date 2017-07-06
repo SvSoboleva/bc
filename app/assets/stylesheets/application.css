@@ -23,6 +23,10 @@
   margin-bottom: 20px;
 }
 
+.buffer-left {
+  margin-left: 20px;
+}
+
 .buffer-both {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -43,14 +47,31 @@
 /* Thumbnails for events/index */
 .thumbnail {
   position: relative;
-  background: transparent;
   padding: 0;
   overflow: hidden;
   border-radius: 5px;
-  width: 150px;
-  height: 250px;
+  width: 200px;
+  height: 300px;
 }
 
 .thumbnail-inner {
   padding: 1px 1px 1px;
+  height: 250px;
+  line-height: 250px;
+  width: auto;
+}
+
+.book_cover {
+  padding: 1px 1px 1px 1px;
+  height: 350px;
+  line-height: 350px;
+  width: auto;
+  overflow: hidden;
+  border-radius: 5px;
+  float: left;
+}
+
+.book-img {
+  display: inline-block;
+  vertical-align: middle;
 }

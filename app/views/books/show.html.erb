@@ -1,4 +1,33 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-4 buffer-top">
+   <div class="book_cover">
+     <div class="book-img">
+       <%= image_tag(book_img(@book)) %>
+     </div>
+   </div>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
+   <% if current_user_can_edit?(@book) %>
+     <div class="buffer-both">
+       <%= link_to t('view.btn.change'), edit_book_path(@book),
+                      class: 'btn btn-primary' %>
+       <%= link_to t('view.btn.delete'), book_path(@book),
+                      method: :delete, data: { confirm: t('view.message.sure') }, class: 'btn btn-danger' %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-6 buffer-top">
+    <div class="buffer-left">
+      <h2> <%= @book.author %> </h2>
+      <h2> <%= @book.title %> </h2>
+      <p> <%= @book.description %> </p>
+    </div>
+  </div>
+  <div class="col-md-2 buffer-top">
+    <span>Добавил: <%= @book.user.name %> </span>
+  </div>
+</div>
+
+
+
+
 <%= link_to 'Back', books_path %>

@@ -1,4 +1,4 @@
 class Section < ApplicationRecord
-  has_many :books
+  has_many :books, dependent: :destroy
   validates :name, presence: true, length: { maximum: 35 }
 end

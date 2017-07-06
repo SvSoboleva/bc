@@ -1,9 +1,6 @@
 class SectionsController < ApplicationController
   before_action :set_section, only: [:show, :edit, :update, :destroy]
 
-  def show
-  end
-
   def new
     @section = Section.new
   end

@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :books
 
   before_validation :set_name, on: :create
-  validates :name, presence: true, length: { maximum: 35 }
+  validates :name, presence: true, length: { maximum: 20 }
 
   private
 

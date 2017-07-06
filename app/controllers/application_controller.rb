@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   # Хелпер метод, доступный во вьюхах
   helper_method :current_user_can_edit?
+  helper_method :current_user_is_admin?
 
   # Настройка для девайза — разрешаем обновлять профиль, но обрезаем
   # параметры, связанные со сменой пароля.
@@ -23,7 +24,11 @@ class ApplicationController < ActionController::Base
     (user_signed_in? && current_user.is_admin?) || (
     user_signed_in? && (
     model.user == current_user ||
-        (model.try(:event).present? && model.event.user == current_user)
+        (model.try(:book).present? && model.book.user == current_user)
     ))
+  end
+
+  def current_user_is_admin?
+    user_signed_in? && current_user.is_admin?
   end
 end
