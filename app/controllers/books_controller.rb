@@ -6,6 +6,7 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     @sections = Section.all
+    @lists = List.where(user: current_user)
   end
 
   def show

@@ -1,0 +1,14 @@
+<%# Паршиал дляотображения формы создания нового списка пользователя %>
+<%= form_for(@list) do |f| %>
+    <%= render partial: 'partials/form_errors', locals: {model: @list} %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
+      или <%= link_to 'вернуться', :back %>
+    </div>
+<% end %>

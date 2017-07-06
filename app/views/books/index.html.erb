@@ -13,6 +13,17 @@
     <% if current_user_is_admin? %>
       <%= link_to 'Создать раздел', new_section_path, class: 'btn btn-success' %>
     <% end %>
+
+    <% if user_signed_in? %>
+      <div class="buffer-top">
+        <h4>Мои списки:</h4>
+      </div>
+      <% if current_user.lists.any? %>
+        <%= render partial: 'lists/list', collection: @lists %>
+      <% else %>
+        <p>Списки можно добавить через профиль</p>
+      <% end %>
+    <% end %>
   </div>
 
     <%# Рендерим массив книг, каждый в паршиале 'books/book' %>

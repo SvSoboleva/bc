@@ -1,0 +1,10 @@
+<div>
+  <%= link_to list.name, root_path %>
+  <%= link_to(fa_icon('edit'), edit_list_path(list)) %>
+  <% unless list.books.any? %>
+      <%= link_to(
+              fa_icon('trash'), list_path(list),
+              method: :delete, data: {confirm: t('view.message.sure')}
+          ) %>
+  <% end %>
+</div>

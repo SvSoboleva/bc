@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :books
+  has_many :lists
 
   before_validation :set_name, on: :create
   validates :name, presence: true, length: { maximum: 20 }
