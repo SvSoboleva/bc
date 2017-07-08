@@ -30,13 +30,15 @@
 <div class="row">
   <div class="col-md-8"></div>
   <div class="col-md-4">
-    <h4>Добавить книгу в мой список</h4>
-    <%= form_tag create_booklist_book_path(@book), :method => :get do %>
-      <%= render partial: 'partials/form_errors', locals: {model: @book} %>
-      <p class="buffer-top">
-        <%= select_tag :query, options_for_select(current_user.lists.collect{ |u| [u.name, u.id] }, params[:query])%>
-        <%= submit_tag "Добавить", class: 'btn btn-primary' %>
-      </p>
+    <% if current_user_can_add_book? %>
+      <h4>Добавить книгу в мой список</h4>
+      <%= form_tag create_booklist_book_path(@book), :method => :get do %>
+        <%= render partial: 'partials/form_errors', locals: {model: @book} %>
+        <p class="buffer-top">
+          <%= select_tag :query, options_for_select(current_user.lists.collect{ |u| [u.name, u.id] }, params[:query])%>
+          <%= submit_tag "Добавить", class: 'btn btn-primary' %>
+        </p>
+      <% end %>
     <% end %>
   </div>
 </div>
