@@ -27,6 +27,10 @@ ru:
         book_url: 'Обложка'
         description: 'Описание'
         section: 'Раздел библиотеки'
+      section:
+        name: 'Название раздела'
+      list:
+        name: 'Название списка'
 
   error:
     one: '%{count} ошибка'

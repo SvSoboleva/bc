@@ -20,7 +20,7 @@ class ListsController < ApplicationController
     @list = current_user.lists.build(list_params)
 
     if @list.save
-      redirect_to user_path(current_user), notice: I18n.t('controllers.lists.created')
+      redirect_to root_path, notice: I18n.t('controllers.lists.created')
     else
       render :new
     end
