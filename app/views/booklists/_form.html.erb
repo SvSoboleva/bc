@@ -1,0 +1,14 @@
+<%# Паршиал для отображения формы создания новой книги %>
+<%= form_for(@booklist) do |f| %>
+    <%= render partial: 'partials/form_errors', locals: {model: @booklist} %>
+
+    <div class="form-group">
+      <%= f.label :list %>
+      <%= f.collection_select(:list_id, current_user.list.all, :id, :name) %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
+      или <%= link_to 'вернуться', :back %>
+    </div>
+<% end %>

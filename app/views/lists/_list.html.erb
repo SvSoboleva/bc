@@ -1,5 +1,5 @@
 <div>
-  <%= link_to list.name, root_path %>
+  <%= link_to list.name, list_path(list) %>
   <%= link_to(fa_icon('edit'), edit_list_path(list)) %>
   <% unless list.books.any? %>
       <%= link_to(

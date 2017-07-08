@@ -44,8 +44,15 @@
     <%# Для вывода названия приложения используем хелпер I18n.t %>
     <%= link_to t('app.name'), root_path, class: 'navbar-brand' %>
 
+
     <div class="navbar-collapse collapse navbar-responsive-collapse">
-      <ul class="nav navbar-nav">
+      <%= form_tag root_path, :method => :get do %>
+          <p class="nav navbar-nav buffer-top-search" >
+            <%= text_field_tag :query, params[:query] %>
+            <%= submit_tag "Найти", class: 'btn btn-primary' %>
+          </p>
+      <% end %>
+      <ul class="nav navbar-nav buffer-left">
         <% if user_signed_in? %>
           <li><%= link_to 'Профиль', current_user %></li>
           <li><%= link_to 'Выйти', destroy_user_session_path, :method => :delete %></li>

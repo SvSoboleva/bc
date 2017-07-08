@@ -1,10 +1,15 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_book, only: [:show]
+  before_action :set_book, only: [:show, :create_booklist]
   before_action :set_current_user_book, only: [:edit, :update, :destroy]
 
   def index
-    @books = Book.all
+    if params[:query]
+      @books = Book.where("title LIKE '%#{params[:query]}%'")
+    else
+      @books = Book.all
+    end
+    @model = []
     @sections = Section.all
     @lists = List.where(user: current_user)
   end
@@ -12,7 +17,6 @@ class BooksController < ApplicationController
   def show
   end
 
-  # GET /books/new
   def new
     @book = current_user.books.build
   end
@@ -41,6 +45,11 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     redirect_to root_path, notice: I18n.t('controllers.books.destroyed')
+  end
+
+  def create_booklist
+    @booklist = @book.booklist.build
+    render 'booklists/new'
   end
 
   private

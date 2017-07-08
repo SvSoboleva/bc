@@ -19,6 +19,10 @@
   margin-top: 20px;
 }
 
+.buffer-top-search {
+  margin-top: 8px;
+}
+
 .buffer-bottom {
   margin-bottom: 20px;
 }
@@ -28,8 +32,8 @@
 }
 
 .buffer-both {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 /* Avatars for users & events */
@@ -44,7 +48,7 @@
   width: auto;
 }
 
-/* Thumbnails for events/index */
+/* Thumbnails for books/index */
 .thumbnail {
   position: relative;
   padding: 0;
@@ -56,8 +60,8 @@
 
 .thumbnail-inner {
   padding: 1px 1px 1px;
-  height: 250px;
-  line-height: 250px;
+  height: 230px;
+  line-height: 230px;
   width: auto;
 }
 
@@ -74,4 +78,15 @@
 .book-img {
   display: inline-block;
   vertical-align: middle;
+}
+
+.book-title {
+    height: 48px;
+    width: 100%;
+}
+
+.list-action {
+  height: 20px;
+  width: 100%;
+  background-color: #BBBBBB;
 }

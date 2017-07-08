@@ -1,6 +1,14 @@
 class SectionsController < ApplicationController
   before_action :set_section, only: [:show, :edit, :update, :destroy]
 
+  def show
+    @model = @section
+    @books = Book.where(section: @section)
+    @sections = Section.all
+    @lists = List.where(user: current_user)
+    render 'books/index'
+  end
+
   def new
     @section = Section.new
   end

@@ -1,12 +1,17 @@
-<div class="col-sm-9 col-md-4">
+<div class="col-md-9 col-md-3" xmlns="http://www.w3.org/1999/html">
 <div class="thumbnail">
   <div class="thumbnail-inner">
     <div class="book-img">
       <%= link_to image_tag(book_img(book)), book_path(book) %>
-
     </div>
   </div>
-  <div><%= book.title %></div>
-  <div><%= book.author %></div>
+  <div class="book-title">
+    <div><%= book.title %></div>
+    <%= book.author %>
+  </div>
+  <div class="list-action">
+
+      <%= link_to(fa_icon('plus'), create_booklist_path(book)) %>
+  </div>
 </div>
 </div>
