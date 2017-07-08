@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
   resources :sections
   resources :lists
-  resources :booklists
 
-  get 'books/:id', to: "books#create_booklist", as: :create_booklist
+  resources :books do
+    member do
+      get 'create_booklist'
+    end
+  end
 end

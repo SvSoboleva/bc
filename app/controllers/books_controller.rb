@@ -48,8 +48,8 @@ class BooksController < ApplicationController
   end
 
   def create_booklist
-    @booklist = @book.booklist.build
-    render 'booklists/new'
+    BookList.create!(book: @book, list: List.find(params[:query]))
+    redirect_to @book, notice: I18n.t('controllers.books.add')
   end
 
   private

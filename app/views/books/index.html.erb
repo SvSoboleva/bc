@@ -16,7 +16,9 @@
 <div class="row buffer-bottom">
   <div class="col-md-3">
     <div class="buffer-both">
-      <%= link_to 'Все', root_path %>
+      <a href="#"><%= link_to 'Все', root_path %>
+        <span class="badge pull-right"><%= Book.count %></span>
+      </a>
       <%= render partial: 'sections/section', collection: @sections %>
     </div>
     <% if current_user_is_admin? %>
@@ -38,7 +40,7 @@
     <% end %>
   </div>
 
-    <%# Рендерим массив книг, каждый в паршиале 'books/book' %>
-    <%= render partial: 'books/book', collection: @books %>
+  <%# Рендерим массив книг, каждый в паршиале 'books/book' %>
+  <%= render partial: 'books/book', collection: @books %>
 
 </div>

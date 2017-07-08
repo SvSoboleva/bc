@@ -9,10 +9,5 @@
     <div><%= book.title %></div>
     <%= book.author %>
   </div>
-  <div class="list-action">
-    <% if current_user_can_add_book? %>
-      <%= link_to(fa_icon('plus'), create_booklist_path(book)) %>
-    <% end %>
-  </div>
 </div>
 </div>
