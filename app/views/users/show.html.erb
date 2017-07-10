@@ -6,19 +6,3 @@
                                         edit_user_path(@user), class: 'btn btn-default' %></p>
   <% end %>
 </div>
-
-<div class="row">
-  <div class="col-md-6">
-    <h3>Мои списки:</h3>
-    <% if @user.lists.any? %>
-        <div class="row">
-          <%= render partial: 'lists/list', collection: @user.lists %>
-        </div>
-    <% else %>
-        <p class="buffer-top">Пока нет ни одного списка</p>
-    <% end %>
-    <div class="buffer-top">
-      <%= link_to 'Создать список', new_list_path, class: 'btn btn-success' %>
-    </div>
-  </div>
-</div>

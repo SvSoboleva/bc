@@ -5,7 +5,7 @@ class BooksController < ApplicationController
 
   def index
     if params[:query]
-      @books = Book.where("title LIKE '%#{params[:query]}%'")
+      @books = Book.where("title LIKE '%#{params[:query]}%' OR author LIKE '%#{params[:query]}%'")
     else
       @books = Book.all
     end
@@ -43,13 +43,21 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book.destroy
-    redirect_to root_path, notice: I18n.t('controllers.books.destroyed')
+    if BookList.where(book: @book)
+      redirect_to book_path(@book), notice: I18n.t('controllers.books.nodelete')
+    else
+      @book.destroy
+      redirect_to root_path, notice: I18n.t('controllers.books.destroyed')
+    end
   end
 
   def create_booklist
-    BookList.create!(book: @book, list: List.find(params[:query]))
-    redirect_to @book, notice: I18n.t('controllers.books.add')
+    if BookList.where(book: @book, list: List.find(params[:query])).exists?
+      redirect_to @book, notice: I18n.t('controllers.books.alreadyadded')
+    else
+      BookList.create!(book: @book, list: List.find(params[:query]))
+      redirect_to @book, notice: I18n.t('controllers.books.add')
+    end
   end
 
   private

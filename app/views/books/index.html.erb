@@ -1,46 +1,49 @@
-<div class="row buffer-both">
+<div class="container">
+<div class="row">
+
   <div class="col-md-3">
-    <% if user_signed_in? %>
-      <%= link_to 'Добавить книгу', new_book_path, class: 'btn btn-success' %>
-    <% end %>
+    <div class="row">
+      <div class="buffer-both buffer-right">
+        <a href="#"><%= link_to 'Все', root_path %>
+          <span class="badge pull-right badge-background"><%= Book.count %></span>
+        </a>
+        <%= render partial: 'sections/section', collection: @sections %>
+      </div>
+      <% if current_user_is_admin? %>
+          <%= link_to 'Создать раздел', new_section_path, class: 'btn btn-success btn-xs' %>
+      <% end %>
+
+      <% if user_signed_in? %>
+          <div class="buffer-list">
+            <h4>Мои списки:</h4>
+          </div>
+          <% if current_user.lists.any? %>
+              <%= render partial: 'lists/list', collection: @lists %>
+          <% else %>
+              <p>Пока нет ни одного списка</p>
+          <% end %>
+          <div class="buffer-top">
+            <%= link_to 'Создать список', new_list_path, class: 'btn btn-success btn-xs' %>
+          </div>
+      <% end %>
+    </div>
   </div>
+
   <div class="col-md-9">
+    <div class="row">
     <% if @model == [] %>
       <h4 class="text-left">Раздел библиотеки: Все</h4>
     <% else %>
       <h4 class="text-left">Раздел библиотеки: <%= @model.name %></h4>
     <% end %>
-  </div>
-</div>
-
-<div class="row buffer-bottom">
-  <div class="col-md-3">
-    <div class="buffer-both">
-      <a href="#"><%= link_to 'Все', root_path %>
-        <span class="badge pull-right"><%= Book.count %></span>
-      </a>
-      <%= render partial: 'sections/section', collection: @sections %>
     </div>
-    <% if current_user_is_admin? %>
-      <%= link_to 'Создать раздел', new_section_path, class: 'btn btn-success' %>
-    <% end %>
 
-    <% if user_signed_in? %>
-      <div class="buffer-top">
-        <h4>Мои списки:</h4>
-      </div>
-      <% if current_user.lists.any? %>
-        <%= render partial: 'lists/list', collection: @lists %>
-      <% else %>
-        <p>Пока нет ни одного списка</p>
-      <% end %>
-      <div class="buffer-top">
-        <%= link_to 'Создать список', new_list_path, class: 'btn btn-success' %>
-      </div>
-    <% end %>
+   <div class="row">
+     <%# Рендерим массив книг, каждый в паршиале 'books/book' %>
+     <%= render partial: 'books/book', collection: @books %>
+    </div>
   </div>
 
-  <%# Рендерим массив книг, каждый в паршиале 'books/book' %>
-  <%= render partial: 'books/book', collection: @books %>
 
+</div>
 </div>

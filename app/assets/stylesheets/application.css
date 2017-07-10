@@ -19,8 +19,12 @@
   margin-top: 20px;
 }
 
+.buffer-list {
+    margin-top: 50px;
+}
+
 .buffer-top-search {
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .buffer-bottom {
@@ -29,6 +33,10 @@
 
 .buffer-left {
   margin-left: 20px;
+}
+
+.buffer-right {
+    margin-right: 25px;
 }
 
 .buffer-both {
@@ -60,19 +68,9 @@
 
 .thumbnail-inner {
   padding: 1px 1px 1px;
-  height: 230px;
-  line-height: 230px;
+  height: 250px;
+  line-height: 250px;
   width: auto;
-}
-
-.book_cover {
-  padding: 1px 1px 1px 1px;
-  height: 350px;
-  line-height: 350px;
-  width: auto;
-  overflow: hidden;
-  border-radius: 5px;
-  float: left;
 }
 
 .book-img {
@@ -81,12 +79,37 @@
 }
 
 .book-title {
-    height: 48px;
-    width: 100%;
+  padding: 1px 1px 1px;
+  height: 48px;
+  width: 100%;
+}
+
+.book_cover {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 5px;
+  height: 400px;
+  width: 300px;
+}
+
+.book-inner {
+  padding: 1px 1px 1px;
+  height: 398px;
+  line-height: 398px;
+  max-width: 298px;
 }
 
 .list-action {
   height: 20px;
   width: 100%;
   background-color: #BBBBBB;
+}
+
+.badge-background {
+    background-color: #AAAAAA;
+}
+
+.btn-text-color {
+  color: white;
 }

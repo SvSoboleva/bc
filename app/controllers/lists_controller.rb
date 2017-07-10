@@ -28,7 +28,7 @@ class ListsController < ApplicationController
 
   def update
     if @list.update(list_params)
-      redirect_to user_path(current_user), notice: I18n.t('controllers.lists.updated')
+      redirect_to root_path, notice: I18n.t('controllers.lists.updated')
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class ListsController < ApplicationController
 
   def destroy
     @list.destroy
-    redirect_to user_path(current_user), notice: I18n.t('controllers.lists.destroyed')
+    redirect_to root_path, notice: I18n.t('controllers.lists.destroyed')
   end
 
   private
