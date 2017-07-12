@@ -22,11 +22,10 @@ class ApplicationController < ActionController::Base
   # может править указанную модель. Обновили метод — теперь на вход принимаем
   # event, или «дочерние» объекты
   def current_user_can_edit?(model)
-    (user_signed_in? && current_user.is_admin?) || (
     user_signed_in? && (
     model.user == current_user ||
         (model.try(:book).present? && model.book.user == current_user)
-    ))
+    )
   end
 
   def current_user_is_admin?

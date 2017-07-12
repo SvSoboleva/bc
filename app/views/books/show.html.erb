@@ -19,8 +19,8 @@
     <div class="buffer-left">
       <h2> <%= @book.title %> </h2>
       <h3> <%= @book.author %> </h3>
-      <span class="buffer-bottom">Раздел библиотеки: <%= @book.section.name %> </span>
-      <p> <%= @book.description %> </p>
+      <span class="buffer-top">Раздел библиотеки: <%= @book.section.name %> </span>
+      <p class="buffer-top"> <%= @book.description %> </p>
     </div>
   </div>
   <div class="col-md-2 buffer-top">
