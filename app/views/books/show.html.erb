@@ -1,15 +1,13 @@
 <div class="row">
   <div class="col-md-4 buffer-top">
-    <div class="book_cover">
-      <div class="book-inner">
-        <div class="book-img">
-          <%= image_tag(book_img(@book)) %>
-        </div>
-      </div>
+   <div class="book_cover">
+     <div class="book-img">
+       <%= image_tag(book_img(@book)) %>
+     </div>
    </div>
 
    <% if current_user_can_edit?(@book) %>
-     <div class="buffer-both">
+     <div class="buffer-top">
        <%= link_to t('view.btn.change'), edit_book_path(@book),
                       class: 'btn btn-primary' %>
        <%= link_to t('view.btn.delete'), book_path(@book),
@@ -19,16 +17,17 @@
   </div>
   <div class="col-md-6 buffer-top">
     <div class="buffer-left">
-      <h2> <%= @book.author %> </h2>
       <h2> <%= @book.title %> </h2>
-      <span>Раздел библиотеки: <%= @book.section.name %> </span>
+      <h3> <%= @book.author %> </h3>
+      <span class="buffer-bottom">Раздел библиотеки: <%= @book.section.name %> </span>
       <p> <%= @book.description %> </p>
     </div>
   </div>
   <div class="col-md-2 buffer-top">
-    <span>Добавил: <%= @book.user.name %> </span>
+    <span>Добавил: <%= link_to @book.user.name, user_path(@book.user_id) %> </span>
   </div>
 </div>
+
 <div class="row">
   <div class="col-md-8"></div>
   <div class="col-md-4">
@@ -45,6 +44,6 @@
   </div>
 </div>
 
-
-
-<%= link_to 'Back', books_path %>
+<div class="buffer-list">
+<%= link_to t('view.btn.backbook'), books_path %>
+</div>

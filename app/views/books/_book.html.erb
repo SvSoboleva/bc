@@ -2,11 +2,9 @@
 <div class="row" >
 <div class="thumbnail">
   <div class="thumbnail-inner">
-    <div class="book-img">
-      <%= link_to image_tag(book_img(book)), book_path(book) %>
-    </div>
+      <%= link_to image_tag(book_img(book)), book_path(book), class: 'img-responsive' %>
   </div>
-  <div class="book-title">
+  <div class="caption">
     <div><%= book.title %></div>
     <%= book.author %>
   </div>

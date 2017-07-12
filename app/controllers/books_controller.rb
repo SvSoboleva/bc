@@ -5,7 +5,7 @@ class BooksController < ApplicationController
 
   def index
     if params[:query]
-      @books = Book.where("title LIKE '%#{params[:query]}%' OR author LIKE '%#{params[:query]}%'")
+      @books = Book.where("title.downcase LIKE '%#{params[:query]}%' OR author.downcase LIKE '%#{params[:query]}%'")
     else
       @books = Book.all
     end

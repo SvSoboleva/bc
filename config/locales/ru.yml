@@ -72,3 +72,4 @@ ru:
     btn:
       change: 'Изменить'
       delete: 'Удалить'
+      backbook: 'К списку книг'
