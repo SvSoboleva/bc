@@ -1,13 +1,15 @@
 <div class="col-md-9 col-md-3">
 <div class="row" >
-<div class="thumbnail">
-  <div class="thumbnail-inner">
+<div class="col-md-12">
+<div class="thumbnail thumbnail-list">
+  <a href="" target="_blank">
       <%= link_to image_tag(book_img(book)), book_path(book), class: 'img-responsive' %>
-  </div>
   <div class="caption">
     <div><%= book.title %></div>
     <%= book.author %>
   </div>
+  </a>
+</div>
 </div>
 </div>
 </div>

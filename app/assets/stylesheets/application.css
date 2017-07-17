@@ -28,10 +28,6 @@ body {
     flex: 1;
 }
 
-.content-footer {
-    height: 60px;
-}
-
 /* Buffers */
 .buffer-top {
   margin-top: 20px;
@@ -66,7 +62,7 @@ body {
   margin-bottom: 10px;
 }
 
-/* Avatars for users & events */
+/* Avatars for users */
 .img-icon, .img-icon-small {
   height: 50px;
   width: auto;
@@ -78,28 +74,24 @@ body {
   width: auto;
 }
 
-/* Thumbnails for books/index */
-.thumbnail {
-  position: relative;
-  padding: 0;
-  overflow: hidden;
-  border-radius: 5px;
+.thumbnail-list {
+  height: 350px;
   width: 200px;
-  height: 300px;
+  overflow: hidden;
 }
 
-.thumbnail-inner {
-  padding: 1px 1px 1px;
-  height: 230px;
-  width: auto;
+.thumbnail-book {
+  height: 350px;
+  width: 250px;
+  overflow: hidden;
 }
 
 .book_cover {
   padding: 1px 1px 1px 1px;
   height: 350px;
   line-height: 350px;
-  width: auto;
   overflow: hidden;
+  width: auto;
   border-radius: 5px;
   float: left;
 }
