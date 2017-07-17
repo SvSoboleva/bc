@@ -53,6 +53,10 @@ body {
   margin-left: 20px;
 }
 
+.padd-left {
+  padding-left: 4px;
+}
+
 .buffer-right {
     margin-right: 25px;
 }
@@ -78,6 +82,7 @@ body {
   height: 350px;
   width: 200px;
   overflow: hidden;
+  float: left;
 }
 
 .thumbnail-book {

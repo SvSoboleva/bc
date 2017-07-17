@@ -1,10 +1,12 @@
 <div class="buffer-section">
   <%= link_to list.name, list_path(list) %>
-  <%= link_to(fa_icon('edit'), edit_list_path(list)) %>
-  <% unless list.books.any? %>
+  <% if current_user_can_edit?(list) %>
+    <%= link_to(fa_icon('edit'), edit_list_path(list)) %>
+    <% unless list.books.any? %>
       <%= link_to(
               fa_icon('trash'), list_path(list),
               method: :delete, data: {confirm: t('view.message.sure')}
           ) %>
+    <% end %>
   <% end %>
 </div>

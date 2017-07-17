@@ -19,13 +19,9 @@ class ApplicationController < ActionController::Base
   end
 
   # Вспомогательный метод, возвращает true, если текущий залогиненный юзер
-  # может править указанную модель. Обновили метод — теперь на вход принимаем
-  # event, или «дочерние» объекты
+  # может править указанную модель.
   def current_user_can_edit?(model)
-    user_signed_in? && (
-    model.user == current_user ||
-        (model.try(:book).present? && model.book.user == current_user)
-    )
+    user_signed_in? && model.user == current_user
   end
 
   def current_user_is_admin?
