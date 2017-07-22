@@ -19,7 +19,7 @@ gem 'devise-i18n'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem 'fog-aws'
+gem 'mechanize'
 gem 'carrierwave'
 gem 'rmagick'
 

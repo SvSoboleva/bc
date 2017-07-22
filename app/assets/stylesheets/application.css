@@ -85,6 +85,13 @@ body {
   float: left;
 }
 
+.thumbnail-search {
+  height: 170px;
+  width: 100px;
+  overflow: hidden;
+  float: left;
+}
+
 .thumbnail-book {
   height: 350px;
   width: 250px;

@@ -4,7 +4,7 @@
 
   <div class="form-group">
     <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control' %>
+    <%= f.text_field :title, autofocus: true, class: 'form-control' %>
   </div>
 
   <div class="form-group">
@@ -13,7 +13,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :book_url %>
+    <%= f.label :book_url %><span>(Выберите файл с обложкой или <%= submit_tag "поиск обложки", class: 'btn btn-primary btn-xs' %>)</span>
     <p><%= image_tag(@book.book_url.thumb.url) if @book.book_url? %></p>
     <%= f.file_field :book_url %>
   </div>
@@ -32,4 +32,6 @@
     <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
     или <%= link_to 'вернуться', :back %>
   </div>
+
+
 <% end %>

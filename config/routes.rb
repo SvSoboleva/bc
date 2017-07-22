@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :books do
     member do
       get 'create_booklist'
+      get 'create_search'
     end
   end
 end
