@@ -24,23 +24,47 @@ class BooksController < ApplicationController
   end
 
   def edit
+    @comment_search = 'edit'
   end
 
   def create
     @book = current_user.books.build(book_params)
-    # если нет обложки, ищем в сети
-    @books_from_net = []
-    @books_from_net = BookSearch.search(params[:book][:title]) unless params[:book].key?('book_url')
+    @comment_search = ''
 
-    if @books_from_net == [] # не нашли или обложка уже есть, сохраняем книгу
+    # поиск обложки в сети при наличии названия книги
+    if params[:commit] == 'поиск книги' && params[:book][:title] != '' && params[:book][:author] != ''
+
+      # проверяем, есть ли уже такая книга, и переходим к найденным книгам
+      @books = Book.where("title LIKE '%#{params[:book][:title]}%' AND author LIKE '%#{params[:book][:author]}%'")
+      if @books
+        redirect_to root_path, notice: 'Такая книга уже есть в нашей библиотеке'
+      else
+
+
+      @books_from_net = []
+      @books_from_net = BookSearch.search(params[:book][:title], params[:book][:author]) unless params[:book].key?('book_url')
+      @comment_search = 'Книга не найдена' if @books_from_net == []
+      render :new
+      end
+    # выбрана найденная в сети обложка, добавляем книгу
+    elsif params[:commit] == 'выбрать' && params[:id_search]
+      @book.author = params[:id_author]
+      @book.title = params[:id_title]
+      @book.description = params[:id_description]
+      @book.remote_book_url_url = params[:id_image_url]
       if @book.save
-        redirect_to root_path, notice: I18n.t('controllers.books.created')
+        redirect_to book_path(@book), notice: I18n.t('controllers.books.created')
       else
         render :new
       end
-    else # предлагаем выбор обложки
+    # заполнили форму вручную, добавляем книгу
+    elsif @book.save
+      redirect_to root_path, notice: I18n.t('controllers.books.created')
+    else
       render :new
     end
+
+
   end
 
   def update
@@ -68,17 +92,6 @@ class BooksController < ApplicationController
       redirect_to @book, notice: I18n.t('controllers.books.add')
     end
   end
-
-  def create_search
-    new_book = current_user.books.build
-    new_book.title = @books_from_net[params[:id].to_i][:title]
-    new_book.auther = @books_from_net[params[:id].to_i][:author]
-    new_book.description = @books_from_net[params[:id].to_i][:description]
-    new_book.book_url = @books_from_net[params[:id].to_i][:image_url]
-    new_book.section_id = Section.where(name: 'Художественная')
-    new_book.save
-  end
-
 
   private
 

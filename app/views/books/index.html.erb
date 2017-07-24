@@ -39,8 +39,12 @@
     </div>
 
    <div class="row">
-     <%# Рендерим массив книг, каждый в паршиале 'books/book' %>
-     <%= render partial: 'books/book', collection: @books %>
+     <% unless @books && @books == []  %>
+       <%# Рендерим массив книг, каждый в паршиале 'books/book' %>
+       <%= render partial: 'books/book', collection: @books %>
+     <% else %>
+       <p class="buffer-top">Книги отсутствуют ... Добавляйте! </p>
+     <% end %>
     </div>
   </div>
 

@@ -13,7 +13,10 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :book_url %><span>(Выберите файл с обложкой или <%= submit_tag "поиск обложки", class: 'btn btn-primary btn-xs' %>)</span>
+    <%= f.label :book_url %>
+    <% unless @comment_search == 'edit' %>
+      <span>(Выберите файл с обложкой или <%= submit_tag "поиск книги", class: 'btn btn-primary btn-xs' %>)</span>
+     <% end %>
     <p><%= image_tag(@book.book_url.thumb.url) if @book.book_url? %></p>
     <%= f.file_field :book_url %>
   </div>
@@ -33,5 +36,25 @@
     или <%= link_to 'вернуться', :back %>
   </div>
 
+  <% if @books_from_net && @books_from_net != [] %>
+    <h3>Книга подходит?</h3>
+      <% @books_from_net.each_with_index do |book, id_search| %>
+        <div class="thumbnail thumbnail-search">
+          <a href="" target="_blank">
+            <%= image_tag(book[:image_url]) %>
+            <%= hidden_field_tag('id_search', id_search) %>
+            <%= hidden_field_tag('id_author', book[:author]) %>
+            <%= hidden_field_tag('id_title', book[:title]) %>
+            <%= hidden_field_tag('id_description', book[:description]) %>
+            <%= hidden_field_tag('id_image_url', book[:image_url]) %>
+            <div class="caption">
+              <%= submit_tag "выбрать", class: 'btn btn-default btn-xs' %>
+            </div>
+          </a>
+        </div>
+      <% end %>
+  <% else %>
+    <p class="buffer-top"> <%= @comment_search unless @comment_search == 'edit' %> </p>
+  <% end %>
 
 <% end %>

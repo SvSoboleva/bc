@@ -2,7 +2,7 @@ module BookSearch
  # books_from_ozon = BookRetriever.search(params[:author], params[:book_name])
 
 
-  def self.search(book_name)
+  def self.search(book_name, author)
     books = []
 
     @agent = Mechanize.new()
@@ -11,7 +11,7 @@ module BookSearch
     @agent.keep_alive = false
     @agent.user_agent = "Opera/9.80 (Windows NT 5.1; U; en) Version/10.1"
 
-    link = "http://www.ozon.ru/?context=search&text=#{book_name}&group=div_book&store=1,0"
+    link = "http://www.ozon.ru/?context=search&text=#{book_name}+#{author}&group=div_book&store=1,0"
     page = @agent.get(link)
 
     # Ищем блоки с книгами
@@ -22,11 +22,11 @@ module BookSearch
       author_name = item.search("div.bOneTileProperty").text.squish
 
       # если есть совпадения с нашими данными, получаем ссылку на книгу
-      if book_title =~ /#{book_name}/i
+      if book_title =~ /#{book_name}/i && author_name =~ /#{author}/i
         book_link = item.search("a[@itemprop='url']/@href")
         book = parse_book(book_link, @agent)
-        books.concat book if books.size < 5
-       # break
+        books.concat book
+        break
       end
     end
 

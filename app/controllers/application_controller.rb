@@ -31,4 +31,5 @@ class ApplicationController < ActionController::Base
   def current_user_can_add_book?
     user_signed_in? && current_user.lists.any?
   end
+
 end
