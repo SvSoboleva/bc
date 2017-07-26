@@ -34,19 +34,18 @@ class BooksController < ApplicationController
     # поиск обложки в сети при наличии названия книги
     if params[:commit] == 'поиск книги' && params[:book][:title] != '' && params[:book][:author] != ''
 
-      # проверяем, есть ли уже такая книга, и переходим к найденным книгам
+      # проверяем, есть ли уже такая книга, и переходим к найденной книге
       @books = Book.where("title LIKE '%#{params[:book][:title]}%' AND author LIKE '%#{params[:book][:author]}%'")
-      if @books
-        redirect_to root_path, notice: 'Такая книга уже есть в нашей библиотеке'
+      if @books != nil && @books != []
+        redirect_to book_path(@books[0][:id]), notice: 'Такая книга уже есть в нашей библиотеке'
       else
-
-
+      # поиск книги в сети
       @books_from_net = []
       @books_from_net = BookSearch.search(params[:book][:title], params[:book][:author]) unless params[:book].key?('book_url')
       @comment_search = 'Книга не найдена' if @books_from_net == []
       render :new
       end
-    # выбрана найденная в сети обложка, добавляем книгу
+    # выбрана найденная в сети книги, добавляем в библиотеку
     elsif params[:commit] == 'выбрать' && params[:id_search]
       @book.author = params[:id_author]
       @book.title = params[:id_title]
@@ -84,9 +83,19 @@ class BooksController < ApplicationController
     end
   end
 
+  # добавление книги в список пользователя
   def create_booklist
+    # проверка: книга есть в выбранном списке - о чем и сообщаем
     if BookList.where(book: @book, list: List.find(params[:query])).exists?
       redirect_to @book, notice: I18n.t('controllers.books.alreadyadded')
+
+    # проверка: книга есть в одном из списков - переносим в выбранный список
+    elsif BookList.where(book: @book, list: List.where(user_id: current_user.id)).exists?
+      BookList.where(book: @book, list: List.where(user_id: current_user.id)
+                    ).update(list: List.find(params[:query]))
+      redirect_to @book, notice: I18n.t('controllers.books.moved')
+
+    # добавляем книгу в список
     else
       BookList.create!(book: @book, list: List.find(params[:query]))
       redirect_to @book, notice: I18n.t('controllers.books.add')
