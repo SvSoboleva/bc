@@ -26,6 +26,20 @@
             <%= link_to 'Создать список', new_list_path, class: 'btn btn-success btn-xs' %>
           </div>
       <% end %>
+
+      <div class="buffer-list">
+        <h4>Беседа:</h4>
+      </div>
+      <% if Chat.any? %>
+          <%= render partial: 'chats/chat', collection: @chats %>
+      <% else %>
+          <p>Пока нет ни одной темы</p>
+      <% end %>
+      <% if user_signed_in? %>
+          <div class="buffer-top">
+            <%= link_to 'Создать тему беседы', new_chat_path, class: 'btn btn-success btn-xs' %>
+          </div>
+      <% end %>
     </div>
   </div>
 

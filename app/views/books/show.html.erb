@@ -26,8 +26,7 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-8"></div>
+<div class="row buffer-top">
   <div class="col-md-4">
     <% if current_user_can_add_book? %>
       <h4>Добавить книгу в мой список</h4>
@@ -39,6 +38,20 @@
         </p>
       <% end %>
     <% end %>
+  </div>
+
+  <div class="col-md-8">
+    <div class="buffer-left">
+      <% if user_signed_in? %>
+          <%= render partial: 'comments/form',
+                     locals: {comment: @new_comment || @book.comments.build} %>
+      <% end %>
+
+      <div class="buffer-both">
+        <%= render partial: 'comments/comment',
+                   collection: @book.comments.except(@new_comment) %>
+      </div>
+    </div>
   </div>
 </div>
 

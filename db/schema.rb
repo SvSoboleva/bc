@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170706193226) do
+ActiveRecord::Schema.define(version: 20170725065510) do
 
   create_table "book_lists", force: :cascade do |t|
     t.integer  "list_id"
@@ -32,6 +32,25 @@ ActiveRecord::Schema.define(version: 20170706193226) do
     t.datetime "updated_at",  null: false
     t.index ["section_id"], name: "index_books_on_section_id"
     t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.string   "theme",      null: false
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_chats_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.string   "commentable_type"
+    t.integer  "commentable_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "lists", force: :cascade do |t|
@@ -64,6 +83,8 @@ ActiveRecord::Schema.define(version: 20170706193226) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "provider"
+    t.string   "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

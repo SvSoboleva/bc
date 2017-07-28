@@ -1,0 +1,14 @@
+<%# Паршиал дляотображения формы создания новой темы беседы %>
+<%= form_for(@chat) do |f| %>
+    <%= render partial: 'partials/form_errors', locals: {model: @chat} %>
+
+    <div class="form-group">
+      <%= f.label :theme %>
+      <%= f.text_field :theme, class: 'form-control' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
+      или <%= link_to 'вернуться', :back %>
+    </div>
+<% end %>

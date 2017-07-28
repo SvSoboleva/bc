@@ -1,0 +1,21 @@
+<div class="text-left">
+  <h2><%= @chat.theme %></h2>
+
+<div class="col-md-12 text-left">
+  <div class="buffer-top">
+    <% if user_signed_in? %>
+        <%= render partial: 'comments/form',
+                   locals: {comment: @new_comment || @chat.comments.build} %>
+    <% end %>
+
+    <div class="buffer-both">
+      <%= render partial: 'comments/comment',
+                 collection: @chat.comments.except(@new_comment) %>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="buffer-list">
+  <%= link_to t('view.btn.backbook'), books_path %>
+</div>

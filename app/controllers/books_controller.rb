@@ -14,9 +14,12 @@ class BooksController < ApplicationController
     @model = []
     @sections = Section.all
     @lists = List.where(user: current_user)
+    @chats = Chat.all
   end
 
   def show
+    @model = @book
+    @new_comment = @book.comments.build(params[:comment])
   end
 
   def new
@@ -62,8 +65,6 @@ class BooksController < ApplicationController
     else
       render :new
     end
-
-
   end
 
   def update

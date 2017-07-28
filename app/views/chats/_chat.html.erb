@@ -1,0 +1,10 @@
+<div class="buffer-section">
+  <%= link_to chat.theme, chat_path(chat) %>
+  <%= link_to(fa_icon('edit'), edit_chat_path(chat)) %>
+  <% unless chat.comments.any? %>
+      <%= link_to(
+              fa_icon('trash'), chat_path(chat),
+              method: :delete, data: {confirm: t('view.message.sure')}
+          ) %>
+  <% end %>
+</div>

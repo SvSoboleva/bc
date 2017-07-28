@@ -1,0 +1,12 @@
+<%= form_for [@model, comment] do |f| %>
+    <%= render partial: 'partials/form_errors', locals: {model: comment} %>
+
+    <div class="form-group">
+      <%= f.label :content %>
+      <%= f.text_area :content, class: 'form-control' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Отправить', class: 'btn btn-primary' %>
+    </div>
+<% end %>

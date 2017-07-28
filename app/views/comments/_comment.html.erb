@@ -1,0 +1,25 @@
+<div class="buffer-bottom">
+  <p><%= comment.content %></p>
+  <p>
+    <span>
+      <% if comment.user.present? %>
+        <%= render partial: 'users/user', object: comment.user %>
+      <% end %>
+    </span>
+    <em><%= l comment.created_at, format: :short %></em>
+    <% if current_user_can_edit?(comment) %>
+      <% if comment.commentable_type == 'Book' %>
+        <%= link_to(
+                fa_icon('trash'), book_comment_path(comment.commentable, comment),
+                method: :delete, data: {confirm: t('view.message.sure')}
+        ) %>
+      <% elsif comment.commentable_type == 'Chat' %>
+        <%= link_to(
+                  fa_icon('trash'), chat_comment_path(comment.commentable, comment),
+                    method: :delete, data: {confirm: t('view.message.sure')}
+        ) %>
+      <% end %>
+    <% end %>
+  </p>
+</div>
+

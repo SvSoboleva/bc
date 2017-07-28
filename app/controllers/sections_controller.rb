@@ -6,6 +6,7 @@ class SectionsController < ApplicationController
     @books = Book.where(section: @section)
     @sections = Section.all
     @lists = List.where(user: current_user)
+    @chats = Chat.all
     render 'books/index'
   end
 

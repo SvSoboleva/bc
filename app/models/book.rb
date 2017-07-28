@@ -4,6 +4,7 @@ class Book < ApplicationRecord
 
   has_many :book_lists, dependent: :destroy
   has_many :lists, through: :book_lists, source: :list
+  has_many :comments, as: :commentable
 
   validates :user, presence: true
   validates :section, presence: true
