@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  namespace :users do
+    get 'omniauth_callbacks/vkontakte'
+  end
+
+  devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
   root "books#index"
 
   resources :books
