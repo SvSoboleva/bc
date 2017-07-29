@@ -37,6 +37,10 @@ body {
     margin-top: 50px;
 }
 
+.buffer-add {
+  margin-top: 64px;
+}
+
 .buffer-section {
     margin-top: 5px;
 }
@@ -55,6 +59,10 @@ body {
 
 .padd-left {
   padding-left: 4px;
+}
+
+.padd0-left {
+  padding-left: 0;
 }
 
 .buffer-right {
@@ -131,4 +139,9 @@ body {
 
 .badge-background {
     background-color: #AAAAAA;
+}
+
+.p_book {
+  max-height: 200px;
+  overflow: auto;
 }

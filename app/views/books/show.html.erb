@@ -1,3 +1,4 @@
+<div class="container padd0-left">
 <div class="row">
   <div class="col-md-4 buffer-top">
    <div class="thumbnail thumbnail-book">
@@ -13,35 +14,35 @@
       </div>
     <% end %>
   </div>
-  <div class="col-md-6 buffer-top">
-    <div class="buffer-left">
+  <div class="col-md-6 padd0-left">
       <h2> <%= @book.title %> </h2>
       <h3> <%= @book.author %> </h3>
       <span class="buffer-top">Раздел библиотеки: <%= @book.section.name %> </span>
-      <p class="buffer-top"> <%= @book.description %> </p>
-    </div>
+      <p class="buffer-top p_book"> <%= @book.description %> </p>
   </div>
   <div class="col-md-2 buffer-top">
-    <span>Добавил: <%= link_to @book.user.name, user_path(@book.user_id) %> </span>
+    <span>Добавил:<%= render partial: 'users/user', object: @book.user %></span>
   </div>
 </div>
 
 <div class="row buffer-top">
   <div class="col-md-4">
-    <% if current_user_can_add_book? %>
-      <h4>Добавить книгу в мой список</h4>
-      <%= form_tag create_booklist_book_path(@book), :method => :get do %>
-        <%= render partial: 'partials/form_errors', locals: {model: @book} %>
-        <p class="buffer-top">
-          <%= select_tag :query, options_for_select(current_user.lists.collect{ |u| [u.name, u.id] }, params[:query])%>
-          <%= submit_tag "Добавить", class: 'btn btn-primary btn-sm' %>
-        </p>
+    <div class="buffer-add">
+      <% if current_user_can_add_book? %>
+        <h4>Добавить книгу в мой список</h4>
+        <%= form_tag create_booklist_book_path(@book), :method => :get do %>
+          <%= render partial: 'partials/form_errors', locals: {model: @book} %>
+          <p class="buffer-top">
+            <%= select_tag :query, options_for_select(current_user.lists.collect{ |u| [u.name, u.id] }, params[:query])%>
+            <%= submit_tag "Добавить", class: 'btn btn-primary btn-sm' %>
+          </p>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 
   <div class="col-md-8">
-    <div class="buffer-left">
+    <div class="row">
       <% if user_signed_in? %>
           <%= render partial: 'comments/form',
                      locals: {comment: @new_comment || @book.comments.build} %>
@@ -57,4 +58,5 @@
 
 <div class="buffer-list">
 <%= link_to t('view.btn.backbook'), books_path %>
+</div>
 </div>
