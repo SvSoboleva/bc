@@ -13,33 +13,39 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :book_url %>
-    <% unless @comment_search == 'edit' %>
-      <span>(Выберите файл с обложкой или <%= submit_tag "поиск книги", class: 'btn btn-primary btn-xs' %>)</span>
-     <% end %>
-    <p><%= image_tag(@book.book_url.thumb.url) if @book.book_url? %></p>
-    <%= f.file_field :book_url %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :description %>
-    <%= f.text_area :description, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
     <%= f.label :section %>
     <%= f.collection_select(:section_id, Section.all, :id, :name) %>
   </div>
 
-  <div class="actions">
-    <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
-    или <%= link_to 'вернуться', :back %>
-  </div>
+  <% if @comment_search == 'edit' %>
+    <div class="form-group">
+      <%= f.label :book_url %>
+      <p><%= image_tag(@book.book_url.thumb.url) if @book.book_url? %></p>
+      <%= f.file_field :book_url %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
+      или <%= link_to 'вернуться', :back %>
+    </div>
+  <% else %>
+
+    <div class="actions buffer-top">
+      <%= f.submit 'Создать без обложки', class: 'btn btn-primary' %>
+      или <%= link_to 'вернуться', :back %>
+      <span class="buffer-left-btn"><%= submit_tag "поиск книги", class: 'btn btn-success' %></span>
+    </div>
+  <% end %>
 
   <% if @books_from_net && @books_from_net != [] %>
     <h3>Книга подходит?</h3>
       <% @books_from_net.each_with_index do |book, id_search| %>
-        <div class="thumbnail thumbnail-search">
+        <div class="thumbnail thumbnail-list">
           <a href="" target="_blank">
             <%= image_tag(book[:image_url]) %>
             <%= hidden_field_tag('id_search', id_search) %>
@@ -47,8 +53,8 @@
             <%= hidden_field_tag('id_title', book[:title]) %>
             <%= hidden_field_tag('id_description', book[:description]) %>
             <%= hidden_field_tag('id_image_url', book[:image_url]) %>
-            <div class="caption">
-              <%= submit_tag "выбрать", class: 'btn btn-default btn-xs' %>
+            <div class="caption text-center">
+              <%= submit_tag "выбрать", class: 'btn btn-success btn-sm' %>
             </div>
           </a>
         </div>

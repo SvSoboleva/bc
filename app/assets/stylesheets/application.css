@@ -57,6 +57,10 @@ body {
   margin-left: 20px;
 }
 
+.buffer-left-btn {
+  margin-left: 26px;
+}
+
 .padd-left {
   padding-left: 4px;
 }
@@ -94,8 +98,8 @@ body {
 }
 
 .thumbnail-search {
-  height: 180px;
-  width: 100px;
+  height: 300px;
+  width: 200px;
   overflow: hidden;
   float: left;
 }
