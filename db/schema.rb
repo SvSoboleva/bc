@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 20170729073702) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "book_lists", force: :cascade do |t|
     t.integer  "list_id"
     t.integer  "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_book_lists_on_book_id"
-    t.index ["list_id"], name: "index_book_lists_on_list_id"
+    t.index ["book_id"], name: "index_book_lists_on_book_id", using: :btree
+    t.index ["list_id"], name: "index_book_lists_on_list_id", using: :btree
   end
 
   create_table "books", force: :cascade do |t|
@@ -30,8 +33,8 @@ ActiveRecord::Schema.define(version: 20170729073702) do
     t.integer  "section_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["section_id"], name: "index_books_on_section_id"
-    t.index ["user_id"], name: "index_books_on_user_id"
+    t.index ["section_id"], name: "index_books_on_section_id", using: :btree
+    t.index ["user_id"], name: "index_books_on_user_id", using: :btree
   end
 
   create_table "chats", force: :cascade do |t|
@@ -39,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170729073702) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_chats_on_user_id"
+    t.index ["user_id"], name: "index_chats_on_user_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
@@ -49,8 +52,8 @@ ActiveRecord::Schema.define(version: 20170729073702) do
     t.integer  "commentable_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
   create_table "lists", force: :cascade do |t|
@@ -58,7 +61,7 @@ ActiveRecord::Schema.define(version: 20170729073702) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_lists_on_user_id"
+    t.index ["user_id"], name: "index_lists_on_user_id", using: :btree
   end
 
   create_table "sections", force: :cascade do |t|
@@ -83,11 +86,16 @@ ActiveRecord::Schema.define(version: 20170729073702) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "provider"
-    t.string   "uid"
     t.string   "url"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "book_lists", "books"
+  add_foreign_key "book_lists", "lists"
+  add_foreign_key "books", "sections"
+  add_foreign_key "books", "users"
+  add_foreign_key "chats", "users"
+  add_foreign_key "comments", "users"
+  add_foreign_key "lists", "users"
 end
