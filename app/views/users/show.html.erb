@@ -16,18 +16,20 @@
 <div class="row buffer-top">
   <div class="col-md-3">
     <div class="row">
-    <h2>Мои списки</h2>
-    <% if @user.lists.any? %>
-        <%= render partial: 'lists/list', collection: @user.lists %>
-    <% else %>
-        <p>Пока нет ни одного списка</p>
-    <% end %>
+      <div class="buffer-right">
+        <h2>Мои списки</h2>
+        <% if @user.lists.any? %>
+          <%= render partial: 'lists/list', collection: @user.lists %>
+        <% else %>
+          <p>Пока нет ни одного списка</p>
+        <% end %>
+      </div>
     </div>
   </div>
 
   <div class="col-md-9">
     <div class="row">
-      <h2>Мои книги</h2>
+      <h2>Мои книги (<%= Book.where(user: @user).count %>)</h2>
       <% if @user.books.any? %>
         <%= render partial: 'books/book', collection: @user.books %>
       <% else %>
