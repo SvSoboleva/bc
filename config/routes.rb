@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'result/index'
+
   namespace :users do
     get 'omniauth_callbacks/vkontakte'
   end
@@ -30,4 +32,6 @@ Rails.application.routes.draw do
   resources :chats, only: [:create, :destroy] do
     concerns :commentable, commentable_type: 'Chat'
   end
+
+  get 'results', to: 'results#index', as: 'results'
 end

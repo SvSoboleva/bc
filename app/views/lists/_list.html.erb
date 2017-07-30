@@ -1,5 +1,5 @@
 <div class="buffer-section">
-  <%= link_to list.name, list_path(list) %>
+  <a href="#"><%= link_to list.name, list_path(list) %>
   <% if current_user_can_edit?(list) %>
     <%= link_to(fa_icon('edit'), edit_list_path(list)) %>
     <% unless list.books.any? %>
@@ -9,4 +9,6 @@
           ) %>
     <% end %>
   <% end %>
+    <span class="badge pull-right badge-list"><%= BookList.where(list: list).map(&:book).count %></span>
+  </a>
 </div>

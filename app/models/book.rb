@@ -1,4 +1,7 @@
 class Book < ApplicationRecord
+  include PgSearch
+  pg_search_scope :search, against: [:title, :author],
+                  using: {tsearch: {dictionary: "russian"}}
   belongs_to :user
   belongs_to :section
 

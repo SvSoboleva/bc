@@ -141,11 +141,24 @@ body {
   background-color: #BBBBBB;
 }
 
-.badge-background {
-    background-color: #AAAAAA;
+.badge-section {
+    background-color: #730E15;
+}
+
+.badge-list {
+  background-color: goldenrod;
+}
+
+.badge-chat {
+  background-color: mediumseagreen;
 }
 
 .p_book {
   max-height: 200px;
+  overflow: auto;
+}
+
+.a_list {
+  max-width: 270px;
   overflow: auto;
 }

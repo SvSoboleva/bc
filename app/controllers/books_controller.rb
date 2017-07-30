@@ -7,7 +7,8 @@ class BooksController < ApplicationController
 
   def index
     if params[:query]
-      @books = Book.where("title LIKE '%#{params[:query]}%' OR author LIKE '%#{params[:query]}%'")
+      #@books = Book.where("title LIKE '%#{params[:query]}%' OR author LIKE '%#{params[:query]}%'")
+      @books = Book.search(params[:query])
     else
       @books = Book.all
     end
@@ -38,15 +39,15 @@ class BooksController < ApplicationController
     if params[:commit] == 'поиск книги' && params[:book][:title] != '' && params[:book][:author] != ''
 
       # проверяем, есть ли уже такая книга, и переходим к найденной книге
-      @books = Book.where("title LIKE '%#{params[:book][:title]}%' AND author LIKE '%#{params[:book][:author]}%'")
-      if @books != nil && @books != []
+      @books = Book.search("#{params[:book][:title]} #{params[:book][:author]}")
+      if @books && @books != []
         redirect_to book_path(@books[0][:id]), notice: 'Такая книга уже есть в нашей библиотеке'
       else
-      # поиск книги в сети
-      @books_from_net = []
-      @books_from_net = BookSearch.search(params[:book][:title], params[:book][:author]) unless params[:book].key?('book_url')
-      @comment_search = 'Книга не найдена' if @books_from_net == []
-      render :new
+        # поиск книги в сети
+        @books_from_net = []
+        @books_from_net = BookSearch.search(params[:book][:title], params[:book][:author]) unless params[:book].key?('book_url')
+        @comment_search = 'Книга не найдена' if @books_from_net == []
+        render :new
       end
     # выбрана найденная в сети книги, добавляем в библиотеку
     elsif params[:commit] == 'выбрать' && params[:id_search]

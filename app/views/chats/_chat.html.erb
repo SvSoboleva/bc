@@ -1,10 +1,15 @@
-<div class="buffer-section">
-  <%= link_to chat.theme, chat_path(chat) %>
-  <%= link_to(fa_icon('edit'), edit_chat_path(chat)) %>
-  <% unless chat.comments.any? %>
+<div class="buffer-top-search a_list">
+  <a href="#"><%= link_to chat.theme, chat_path(chat) %>
+  <% if current_user_can_edit?(chat) %>
+    <%= link_to(fa_icon('edit'), edit_chat_path(chat)) %>
+    <% unless chat.comments.any? %>
       <%= link_to(
               fa_icon('trash'), chat_path(chat),
               method: :delete, data: {confirm: t('view.message.sure')}
-          ) %>
+      ) %>
+    <% end %>
   <% end %>
+    <span class="badge pull-right badge-chat">
+      <%= Comment.where(commentable_type: 'Chat', commentable_id: chat).count %></span>
+  </a>
 </div>
