@@ -4,8 +4,8 @@
       <%= link_to(fa_icon('edit'), edit_section_path(section)) %>
       <% if Book.where(section: section) == [] %>
         <%= link_to(
-              fa_icon('trash'), section_path(section),
-              method: :delete, data: {confirm: t('view.message.sure')}
+               fa_icon('trash'), section_path(section),
+               method: :delete, data: {confirm: t('view.message.sure')}
         ) %>
       <% end %>
   <% end %>
