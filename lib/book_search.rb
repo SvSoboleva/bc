@@ -24,7 +24,7 @@ module BookSearch
       # если есть совпадения с нашими данными, получаем ссылку на книгу
       if book_title =~ /#{book_name}/i && author_name =~ /#{author}/i
         book_link = item.search("a[@itemprop='url']/@href")
-        book = parse_book(book_link, @agent)
+        book = parse_book(book_link, @agent, book_title, author_name)
         books.concat book
         break
       end
@@ -33,22 +33,19 @@ module BookSearch
     return books
   end
 
-  def self.parse_book(link, agent)
+  def self.parse_book(link, agent, title, author)
     # Полная ссылка на страницу
     link = "http://www.ozon.ru#{link}"
 
     # Переход на страницу
-    page = @agent.get(link)
-
-    book_title = page.search("//h1[@itemprop='name']").text.squish
-    book_author = page.search("//div[@itemprop='author']").text.squish.delete(",")
-    book_description = page.search("//div[@class='eProductDescriptionText_text']").text.squish
-    book_image = "http:" + page.search("//img[@class='eMicroGallery_fullImage']/@src").to_s
+    page = agent.get(link)
+    book_description = page.search("//div[@class='eItemDescription_text']").text.squish
+    book_image = "http:" + page.search("img.eMicroGallery_fullImage.mVisible/@src").to_s
 
     # Добавление книги
     new_book = {
-      title: book_title,
-      author: book_author,
+      title: title,
+      author: author,
       description: book_description,
       image_url: book_image
     }

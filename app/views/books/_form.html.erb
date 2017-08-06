@@ -1,5 +1,5 @@
 <%# Паршиал для отображения формы создания новой книги %>
-<%= form_for(@book) do |f| %>
+<%= form_for [@book], html: { multipart: true } do |f| %>
   <%= render partial: 'partials/form_errors', locals: {model: @book} %>
 
   <div class="form-group">
@@ -46,8 +46,8 @@
     <h3>Книга подходит?</h3>
       <% @books_from_net.each_with_index do |book, id_search| %>
         <div class="thumbnail thumbnail-list">
-          <a href="" target="_blank">
             <%= image_tag(book[:image_url]) %>
+          <a href="" target="_blank">
             <%= hidden_field_tag('id_search', id_search) %>
             <%= hidden_field_tag('id_author', book[:author]) %>
             <%= hidden_field_tag('id_title', book[:title]) %>
