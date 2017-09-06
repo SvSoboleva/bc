@@ -23,6 +23,11 @@
         <% else %>
           <p>Пока нет ни одного списка</p>
         <% end %>
+        <% if @user == current_user %>
+          <div class="buffer-top">
+            <%= link_to 'Создать список', new_list_path, class: 'btn btn-success btn-xs' %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
