@@ -1,13 +1,11 @@
 require 'book_search'
 class BooksController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_book, only: [:show, :create_booklist]
-  before_action :set_current_user_book, only: [:edit, :update, :destroy]
+  before_action :set_book, only: [:show, :create_booklist, :edit, :update, :destroy]
   include BookSearch
 
   def index
     if params[:query]
-      #@books = Book.where("title LIKE '%#{params[:query]}%' OR author LIKE '%#{params[:query]}%'")
       @books = Book.search(params[:query])
     else
       @books = Book.all
@@ -45,7 +43,8 @@ class BooksController < ApplicationController
       else
         # поиск книги в сети
         @books_from_net = []
-        @books_from_net = BookSearch.search(params[:book][:title], params[:book][:author]) unless params[:book].key?('book_url')
+        @books_from_net = BookSearch.search(params[:book][:title],
+                                            params[:book][:author]) unless params[:book].key?('book_url')
         @comment_search = 'Книга не найдена' if @books_from_net == []
         render :new
       end
@@ -108,10 +107,6 @@ class BooksController < ApplicationController
 
   def set_book
     @book = Book.find(params[:id])
-  end
-
-  def set_current_user_book
-    @book = current_user.books.find(params[:id])
   end
 
   def book_params

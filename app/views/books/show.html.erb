@@ -5,7 +5,7 @@
        <%= image_tag(book_img(@book)) %>
    </div>
 
-   <% if current_user_can_edit?(@book) %>
+   <% if current_user_can_edit?(@book) || current_user_is_admin? %>
      <div class="buffer-top">
        <%= link_to t('view.btn.change'), edit_book_path(@book),
                       class: 'btn btn-primary' %>
