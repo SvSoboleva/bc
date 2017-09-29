@@ -34,7 +34,9 @@ class BooksController < ApplicationController
     @comment_search = ''
 
     # поиск обложки в сети при наличии названия книги
-    if params[:commit] == 'поиск книги' && params[:book][:title] != '' && params[:book][:author] != ''
+    if params[:commit] == 'поиск книги' &&
+       params[:book][:title] != '' &&
+       params[:book][:author] != ''
 
       # проверяем, есть ли уже такая книга, и переходим к найденной книге
       @books = Book.search("#{params[:book][:title]} #{params[:book][:author]}")
