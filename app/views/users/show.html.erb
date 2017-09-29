@@ -14,33 +14,38 @@
 </div>
 
 <div class="row buffer-top">
-  <div class="col-md-3">
-    <div class="row">
-      <div class="buffer-right">
-        <h2>Мои списки</h2>
-        <% if @user.lists.any? %>
-          <%= render partial: 'lists/list', collection: @user.lists %>
-        <% else %>
-          <p>Пока нет ни одного списка</p>
-        <% end %>
-        <% if @user == current_user %>
-          <div class="buffer-top">
-            <%= link_to 'Создать список', new_list_path, class: 'btn btn-success btn-xs' %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#mybooks">Мои книги (<%= Book.where(user: @user).count %>)</a></li>
+    <% if @user.lists.any? %>
+      <% @user_lists = @user.lists %>
+      <% @user_lists.each do |list| %>
+        <li><a data-toggle="tab" href=<%= "#list_#{list.id}" %>><%= list.name %> (<%= BookList.where(list: list).map(&:book).count %>)</a></li> 
+      <% end %>
+    <% end %>
+  </ul>
 
-  <div class="col-md-9">
-    <div class="row">
-      <h2>Мои книги (<%= Book.where(user: @user).count %>)</h2>
+  <div class="tab-content">
+    <div id="mybooks" class="tab-pane fade in active">
       <% if @user.books.any? %>
         <%= render partial: 'books/book', collection: @user.books %>
       <% else %>
         <p>Пока не добавлено ни одной книги</p>
       <% end %>
-   </div>
+    </div>
+    <% @user_lists.each do |list| %>
+      <% @books = [] %>
+      <% @books = BookList.where(list: list).map(&:book) %>
+      <div id=<%= "list_#{list.id}" %> class="tab-pane fade">
+        <% if @books.present? %>
+          <%= render partial: 'books/book', collection: @books %>
+        <% else %>
+          <p class="buffer-top buffer-left">Пока не добавлено ни одной книги</p>
+        <% end %>
+      </div>
+    <% end %>
+     
+    </div>
   </div>
 </div>
 
