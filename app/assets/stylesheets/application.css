@@ -61,6 +61,10 @@ body {
   margin-left: 26px;
 }
 
+.buffer-left-txt {
+  margin-left: 18px;
+}
+
 .padd-left {
   padding-left: 4px;
 }

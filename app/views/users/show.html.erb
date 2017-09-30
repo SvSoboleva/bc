@@ -34,13 +34,12 @@
       <% end %>
     </div>
     <% @user_lists.each do |list| %>
-      <% @books = [] %>
       <% @books = BookList.where(list: list).map(&:book) %>
       <div id=<%= "list_#{list.id}" %> class="tab-pane fade">
         <% if @books.present? %>
           <%= render partial: 'books/book', collection: @books %>
         <% else %>
-          <p class="buffer-top buffer-left">Пока не добавлено ни одной книги</p>
+          <p class="buffer-top buffer-left-txt">Пока не добавлено ни одной книги</p>
         <% end %>
       </div>
     <% end %>
