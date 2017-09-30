@@ -6,7 +6,7 @@
   </div>
   <div class="col-md-9">
     <h1 class="buffer-section"><%= @user.name %></h1>
-    <% if @user == current_user %>
+    <% if @user == current_user || current_user_is_admin? %>
       <p class="buffer-top"><%= link_to 'Редактировать профиль',
                                         edit_user_path(@user), class: 'btn btn-default' %></p>
     <% end %>
@@ -33,6 +33,7 @@
         <p>Пока не добавлено ни одной книги</p>
       <% end %>
     </div>
+    <% if @user_lists.present? %>
     <% @user_lists.each do |list| %>
       <% @books = BookList.where(list: list).map(&:book) %>
       <div id=<%= "list_#{list.id}" %> class="tab-pane fade">
@@ -42,6 +43,7 @@
           <p class="buffer-top buffer-left-txt">Пока не добавлено ни одной книги</p>
         <% end %>
       </div>
+    <% end %>
     <% end %>
      
     </div>
