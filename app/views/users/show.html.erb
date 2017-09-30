@@ -6,7 +6,7 @@
   </div>
   <div class="col-md-9">
     <h1 class="buffer-section"><%= @user.name %></h1>
-    <% if @user == current_user || current_user_is_admin? %>
+    <% if @user == current_user %>
       <p class="buffer-top"><%= link_to 'Редактировать профиль',
                                         edit_user_path(@user), class: 'btn btn-default' %></p>
     <% end %>
