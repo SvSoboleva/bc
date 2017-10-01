@@ -34,33 +34,13 @@ class BooksController < ApplicationController
     @comment_search = ''
 
     # поиск обложки в сети при наличии названия книги
-    if params[:commit] == 'поиск книги' &&
-       params[:book][:title].present? &&
-       params[:book][:author].present?
+    if params[:commit] == 'поиск книги'
+       find_books(params)
 
-      # проверяем, есть ли уже такая книга, и переходим к найденной книге
-      @books = Book.search("#{params[:book][:title]} #{params[:book][:author]}")
-      if @books && @books != []
-        redirect_to book_path(@books[0][:id]), notice: 'Такая книга уже есть в нашей библиотеке'
-      else
-        # поиск книги в сети
-        @books_from_net = []
-        @books_from_net = BookSearch.search(params[:book][:title],
-                                            params[:book][:author]) unless params[:book].key?('book_url')
-        @comment_search = 'Книга не найдена' if @books_from_net == []
-        render :new
-      end
-    # выбрана найденная в сети книги, добавляем в библиотеку
+    # выбрана найденная в сети книга, добавляем в библиотеку
     elsif params[:commit] == 'выбрать' && params[:id_search]
-      @book.author = params[:id_author]
-      @book.title = params[:id_title]
-      @book.description = params[:id_description]
-      @book.remote_book_url_url = params[:id_image_url]
-      if @book.save
-        redirect_to book_path(@book), notice: I18n.t('controllers.books.created')
-      else
-        render :new
-      end
+      add_book(params)
+      
     # заполнили форму вручную, добавляем книгу
     elsif @book.save
       redirect_to root_path, notice: I18n.t('controllers.books.created')
@@ -86,6 +66,7 @@ class BooksController < ApplicationController
     end
   end
 
+
   # добавление книги в список пользователя
   def create_booklist
     # проверка: книга есть в выбранном списке - о чем и сообщаем
@@ -106,6 +87,35 @@ class BooksController < ApplicationController
   end
 
   private
+
+    def find_books(params)
+      # проверяем, есть ли уже такая книга, и переходим к найденной книге
+        @books = Book.search("#{params[:book][:title]} #{params[:book][:author]}")
+        if @books.present?
+          redirect_to book_path(@books[0][:id]), notice: 'Такая книга уже есть в нашей библиотеке'
+        else
+          # поиск книги в сети
+          @books_from_net = []
+          @books_from_net = BookSearch.search(params[:book][:title],
+                                              params[:book][:author]) unless params[:book].key?('book_url')
+          @comment_search = 'Книга не найдена' if @books_from_net == []
+          render :new
+        end
+    end
+
+
+   def add_book(params)
+    @book.author = params[:id_author]
+      @book.title = params[:id_title]
+      @book.description = params[:id_description]
+      @book.remote_book_url_url = params[:id_image_url]
+      if @book.save
+        redirect_to book_path(@book), notice: I18n.t('controllers.books.created')
+      else
+        render :new
+      end
+  end
+
 
   def set_book
     @book = Book.find(params[:id])
